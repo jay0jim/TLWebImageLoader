@@ -52,8 +52,7 @@
     _indicatorView.center = _TLImageView.center;
     _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [self addSubview:_indicatorView];
-#warning TODO
-    self.hasLoadedImage = YES;
+    self.hasLoadedImage = NO;
     
 }
 
@@ -63,11 +62,6 @@
     } else {
         [_indicatorView startAnimating];
     }
-}
-
-#pragma mark - 设置图片
-- (void)setDisplayImage:(UIImage *)image {
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

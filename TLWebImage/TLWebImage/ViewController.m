@@ -9,6 +9,8 @@
 #import "ViewController.h"
 
 #import "MyTableViewCell.h"
+#import "ImageFetcher.h"
+#import "UIImageView+TLImage.h"
 
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
@@ -26,7 +28,12 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     tableView.delegate = self;
     tableView.dataSource = self;
-    [self.view addSubview:tableView];
+//    [self.view addSubview:tableView];
+    
+    NSURL *url = [NSURL URLWithString:@"http://imgsrc.baidu.com/forum/pic/item/834128381f30e9245f25188b4c086e061c95f755.jpg"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 30, 200, 150)];
+    [imageView setImageWithURL:url];
+    [self.view addSubview:imageView];
     
 }
 

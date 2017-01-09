@@ -1,5 +1,5 @@
 //
-//  MyTableViewCell.h
+//  UIImageView+TLImage.h
 //  TLWebImage
 //
 //  Created by Tony on 2017/1/9.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyTableViewCell : UITableViewCell
+@interface UIImageView (TLImage)
+
+- (void)setImageWithURL:(NSURL *) url;
 
 @end
