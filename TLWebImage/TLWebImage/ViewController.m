@@ -8,7 +8,13 @@
 
 #import "ViewController.h"
 
+#import "MyTableViewCell.h"
+
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kScreenWidth  [UIScreen mainScreen].bounds.size.width
+
 @interface ViewController ()
+<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -16,7 +22,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
+    
+    if (cell == nil) {
+        cell = [[MyTableViewCell alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, tableView.rowHeight)];
+        
+    }
+    
+    
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
 }
 
 
@@ -27,3 +59,14 @@
 
 
 @end
+
+
+
+
+
+
+
+
+
+
+
