@@ -18,5 +18,6 @@ typedef void(^ImageFetcherBlockComplete)(id object);
 - (void)fetchImageWithURL:(NSURL *) url
          PlaceholderImage:(UIImage *) placeholder
         CompletionHandler:(ImageFetcherBlockComplete) complete;
+- (void)clearLocalFile;
 
 @end

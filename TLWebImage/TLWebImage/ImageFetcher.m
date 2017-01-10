@@ -49,9 +49,9 @@
     _filePath = path;
     
     _cache = [[NSCache alloc] init];
-    // 设置cache最多保存100条内容和100M容量
+    // 设置cache最多保存100条内容和50M容量
     _cache.countLimit = 100;
-    _cache.totalCostLimit = 100 * 1024 * 1024;
+    _cache.totalCostLimit = 50 * 1024 * 1024;
 
 }
 
@@ -125,6 +125,15 @@
         }
     }
     
+}
+
+- (void)clearLocalFile {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:_filePath error:nil];
+    for (NSString *fileName in fileNames) {
+        NSString *path = [_filePath stringByAppendingPathComponent:fileName];
+        [fileManager removeItemAtPath:path error:nil];
+    }
 }
 
 @end

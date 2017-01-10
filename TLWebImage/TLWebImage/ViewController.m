@@ -48,7 +48,7 @@
 @interface ViewController ()
 <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic) NSArray *dataArray;
+@property (nonatomic) NSMutableArray *dataArray;
 
 @end
 
@@ -62,16 +62,14 @@
     tableView.dataSource = self;
     [self.view addSubview:tableView];
     
-    _dataArray = @[@"http://imgsrc.baidu.com/forum/pic/item/834128381f30e9245f25188b4c086e061c95f755.jpg",
-                   @"http://www.baidu.com/img/bdlogo.png",
-                   @"http://imgsrc.baidu.com/forum/pic/item/15c6a0ec08fa513ddb1ce8643d6d55fbb3fbd9a4.jpg",
-                   @"http://imgsrc.baidu.com/forum/pic/item/24a508fa513d2697a7658ce755fbb2fb4216d8a4.jpg",
-                   @"http://imgsrc.baidu.com/forum/pic/item/ef2af6246b600c3392c85a721a4c510fd8f9a1a4.jpg",
-                   @"http://imgsrc.baidu.com/forum/pic/item/30c68c5494eef01f5b879c7fe0fe9925bd317d46.jpg",
-                   @"http://imgsrc.baidu.com/forum/pic/item/4958728b4710b9125c527244c3fdfc0393452246.jpg",
-                   @"http://imgsrc.baidu.com/forum/pic/item/058239dbb6fd526678b8b8aeab18972bd5073646.jpg",
-                   @"http://imgsrc.baidu.com/forum/pic/item/887a8744ebf81a4c49bf6873d72a6059242da640.jpg",
-                   @"http://imgsrc.baidu.com/forum/pic/item/6fb11a4c510fd9f9cd9ad1d3252dd42a2934a440.jpg", ];
+    _dataArray = [[NSMutableArray alloc] initWithArray:@[@"http://imgsrc.baidu.com/forum/pic/item/834128381f30e9245f25188b4c086e061c95f755.jpg", @"http://www.baidu.com/img/bdlogo.png", @"http://imgsrc.baidu.com/forum/pic/item/15c6a0ec08fa513ddb1ce8643d6d55fbb3fbd9a4.jpg", @"http://imgsrc.baidu.com/forum/pic/item/24a508fa513d2697a7658ce755fbb2fb4216d8a4.jpg", @"http://imgsrc.baidu.com/forum/pic/item/ef2af6246b600c3392c85a721a4c510fd8f9a1a4.jpg", @"http://imgsrc.baidu.com/forum/pic/item/30c68c5494eef01f5b879c7fe0fe9925bd317d46.jpg", @"http://imgsrc.baidu.com/forum/pic/item/4958728b4710b9125c527244c3fdfc0393452246.jpg", @"http://imgsrc.baidu.com/forum/pic/item/058239dbb6fd526678b8b8aeab18972bd5073646.jpg", @"http://imgsrc.baidu.com/forum/pic/item/887a8744ebf81a4c49bf6873d72a6059242da640.jpg", @"http://imgsrc.baidu.com/forum/pic/item/6fb11a4c510fd9f9cd9ad1d3252dd42a2934a440.jpg", ]];
+    
+    for (int i = 0; i < 100; i++) {
+        [_dataArray addObject:@"http://imgsrc.baidu.com/forum/pic/item/4958728b4710b9125c527244c3fdfc0393452246.jpg"];
+    }
+    
+    UIBarButtonItem *clearButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearLocalFiles)];
+    self.navigationItem.rightBarButtonItem = clearButtonItem;
     
 }
 
@@ -88,7 +86,7 @@
     }
     
     NSURL *url = [NSURL URLWithString:_dataArray[indexPath.row]];
-    [cell.TLImageView tl_setImageWithURL:url];
+    [cell.TLImageView tl_setImageWithURL:url Placeholder:nil];
     
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
 //    if (cell == nil) {
@@ -105,6 +103,10 @@
     return 100;
 }
 
+#pragma mark - Clear Files
+- (void)clearLocalFiles {
+    [[ImageFetcher sharedInstance] clearLocalFile];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
