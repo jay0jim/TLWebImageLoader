@@ -10,10 +10,40 @@
 
 #import "ImageFetcher.h"
 #import "UIImageView+TLImage.h"
-#import "MyTableViewCell.h"
 
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
+
+// 自定义cell
+@interface MyTableViewCell : UITableViewCell
+
+@property (nonatomic) UIImageView *TLImageView;
+
+@end
+
+@implementation MyTableViewCell: UITableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self initial];
+    }
+    return self;
+}
+
+- (void)initial {
+    // 初始化imageView，设定布局
+    _TLImageView = [[UIImageView alloc] init];
+    NSString *placeholderName = [[NSBundle mainBundle] pathForResource:@"placeholder" ofType:@"jpg"];
+    [_TLImageView setImage:[UIImage imageWithContentsOfFile:placeholderName]];
+    [_TLImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:_TLImageView];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_TLImageView]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_TLImageView)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_TLImageView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_TLImageView)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_TLImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_TLImageView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+    
+}
+
+@end
 
 @interface ViewController ()
 <UITableViewDelegate, UITableViewDataSource>
@@ -50,6 +80,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     MyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
     
     if (cell == nil) {
@@ -58,6 +89,14 @@
     
     NSURL *url = [NSURL URLWithString:_dataArray[indexPath.row]];
     [cell.TLImageView tl_setImageWithURL:url];
+    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCell"];
+//    }
+//    NSURL *url = [NSURL URLWithString:_dataArray[indexPath.row]];
+//    [cell.imageView tl_setImageWithURL:url];
+    
     
     return cell;
 }

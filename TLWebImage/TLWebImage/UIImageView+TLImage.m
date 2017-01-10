@@ -11,15 +11,21 @@
 
 @implementation UIImageView (TLImage)
 
-- (void)tl_setImageWithURL:(NSURL *) url {
-    
+- (void)tl_setImageWithURL:(NSURL *)url {
+    [self tl_setImageWithURL:url Placeholder:nil];
+}
+
+- (void)tl_setImageWithURL:(NSURL *)url Placeholder:(UIImage *)placeholder {
     ImageFetcher *fetcher = [ImageFetcher sharedInstance];
+    
+    
+    
     __weak typeof(self) weakSelf = self;
-    [fetcher fetchImageWithURL:url CompletionHandler:^(id object) {
+    [fetcher fetchImageWithURL:url PlaceholderImage:placeholder CompletionHandler:^(id object) {
         typeof(weakSelf) strongSelf = weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
             strongSelf.image = (UIImage *)object;
-            [strongSelf setNeedsDisplay];
+            [strongSelf setNeedsLayout];
         });
     }];
 }

@@ -15,9 +15,8 @@ typedef void(^ImageFetcherBlockComplete)(id object);
 
 + (id)sharedInstance;
 
-- (void)fetchImageWithURL:(NSURL *)url CompletionHandler:(ImageFetcherBlockComplete) complete;
-
-- (void)testMethod;
-- (void)testMethod2;
+- (void)fetchImageWithURL:(NSURL *) url
+         PlaceholderImage:(UIImage *) placeholder
+        CompletionHandler:(ImageFetcherBlockComplete) complete;
 
 @end

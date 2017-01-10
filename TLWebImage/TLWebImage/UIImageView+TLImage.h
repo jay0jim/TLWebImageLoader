@@ -11,5 +11,6 @@
 @interface UIImageView (TLImage)
 
 - (void)tl_setImageWithURL:(NSURL *) url;
+- (void)tl_setImageWithURL:(NSURL *)url Placeholder:(UIImage *)placeholder;
 
 @end

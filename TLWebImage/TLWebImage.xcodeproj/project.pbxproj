@@ -14,11 +14,10 @@
 		EA01627B1E236085009AB64D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA0162791E236085009AB64D /* Main.storyboard */; };
 		EA01627D1E236085009AB64D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA01627C1E236085009AB64D /* Assets.xcassets */; };
 		EA0162801E236085009AB64D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA01627E1E236085009AB64D /* LaunchScreen.storyboard */; };
-		EA0162891E23615E009AB64D /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0162881E23615E009AB64D /* MyTableViewCell.m */; };
 		EA01628B1E23670B009AB64D /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA01628A1E23670B009AB64D /* placeholder.jpg */; };
 		EA01628E1E237007009AB64D /* ImageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EA01628D1E237007009AB64D /* ImageFetcher.m */; };
+		EA2C7C891E24F3EE00A3D3DB /* UIImageView+TLImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2C7C881E24F3EE00A3D3DB /* UIImageView+TLImage.m */; };
 		EA6CEB701E24B95800E363FA /* 16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA6CEB6F1E24B95800E363FA /* 16.jpg */; };
-		EA7AB6FA1E2381AB00F6C57E /* UIImageView+TLImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7AB6F91E2381AB00F6C57E /* UIImageView+TLImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,14 +34,12 @@
 		EA01627C1E236085009AB64D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA01627F1E236085009AB64D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA0162811E236085009AB64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA0162871E23615E009AB64D /* MyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewCell.h; sourceTree = "<group>"; };
-		EA0162881E23615E009AB64D /* MyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
 		EA01628A1E23670B009AB64D /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		EA01628C1E237007009AB64D /* ImageFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFetcher.h; sourceTree = "<group>"; };
 		EA01628D1E237007009AB64D /* ImageFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFetcher.m; sourceTree = "<group>"; };
+		EA2C7C871E24F3EE00A3D3DB /* UIImageView+TLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TLImage.h"; sourceTree = "<group>"; };
+		EA2C7C881E24F3EE00A3D3DB /* UIImageView+TLImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TLImage.m"; sourceTree = "<group>"; };
 		EA6CEB6F1E24B95800E363FA /* 16.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 16.jpg; sourceTree = "<group>"; };
-		EA7AB6F81E2381AB00F6C57E /* UIImageView+TLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TLImage.h"; sourceTree = "<group>"; };
-		EA7AB6F91E2381AB00F6C57E /* UIImageView+TLImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TLImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,12 +103,10 @@
 				EA01627E1E236085009AB64D /* LaunchScreen.storyboard */,
 				EA0162811E236085009AB64D /* Info.plist */,
 				EA0162701E236085009AB64D /* Supporting Files */,
-				EA0162871E23615E009AB64D /* MyTableViewCell.h */,
-				EA0162881E23615E009AB64D /* MyTableViewCell.m */,
 				EA01628C1E237007009AB64D /* ImageFetcher.h */,
 				EA01628D1E237007009AB64D /* ImageFetcher.m */,
-				EA7AB6F81E2381AB00F6C57E /* UIImageView+TLImage.h */,
-				EA7AB6F91E2381AB00F6C57E /* UIImageView+TLImage.m */,
+				EA2C7C871E24F3EE00A3D3DB /* UIImageView+TLImage.h */,
+				EA2C7C881E24F3EE00A3D3DB /* UIImageView+TLImage.m */,
 			);
 			path = TLWebImage;
 			sourceTree = "<group>";
@@ -233,9 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA7AB6FA1E2381AB00F6C57E /* UIImageView+TLImage.m in Sources */,
+				EA2C7C891E24F3EE00A3D3DB /* UIImageView+TLImage.m in Sources */,
 				EA0162781E236085009AB64D /* ViewController.m in Sources */,
-				EA0162891E23615E009AB64D /* MyTableViewCell.m in Sources */,
 				EA0162751E236085009AB64D /* AppDelegate.m in Sources */,
 				EA0162721E236085009AB64D /* main.m in Sources */,
 				EA01628E1E237007009AB64D /* ImageFetcher.m in Sources */,

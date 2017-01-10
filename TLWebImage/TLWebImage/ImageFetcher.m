@@ -55,7 +55,9 @@
 
 }
 
-- (void)fetchImageWithURL:(NSURL *)url CompletionHandler:(ImageFetcherBlockComplete)complete{
+- (void)fetchImageWithURL:(NSURL *) url
+         PlaceholderImage:(UIImage *) placeholder
+        CompletionHandler:(ImageFetcherBlockComplete) complete {
     NSString *urlString = [url absoluteString];
     
     // 获取文件名
@@ -72,6 +74,13 @@
         
         if (image == nil) {
             
+            // 由于是从网上异步load图，所以不一定马上就能把图片设置到UIImageView
+            // 这样做是为了确保如果在使用UITableView等涉及到重用的类中，重用时会
+            // 显示过时的或错误的图
+            if (complete != nil) {
+                complete(placeholder);
+            }
+            
             // 如果本地沙盒也不存在，则从网络上下载，并保存到本地沙盒和cache中
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             
@@ -87,17 +96,20 @@
                 
             } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
                 
-                // 图片已保存到本地沙盒，接下来在保存到cache
-                NSString *filePathString = [filePath path];
-                image = [UIImage imageWithContentsOfFile:filePathString];
-                [_cache setObject:image forKey:fileName];
-                
-                if (complete != nil) {
-                    complete(image);
+                if (!error) {
+                    // 图片已保存到本地沙盒，接下来在保存到cache
+                    NSString *filePathString = [filePath path];
+                    image = [UIImage imageWithContentsOfFile:filePathString];
+                    [_cache setObject:image forKey:fileName];
+                    
+                    if (complete != nil) {
+                        complete(image);
+                    }
                 }
                 
             }];
             [task resume];
+            
             
         } else {
             // 把从本地沙盒读取到的图片放入cache中
@@ -113,58 +125,6 @@
         }
     }
     
-}
-
-- (void)testMethod {
-    
-    NSURL *url = [NSURL URLWithString:@"http://imgsrc.baidu.com/forum/pic/item/ef2af6246b600c3392c85a721a4c510fd8f9a1a4.jpg"];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-        
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        
-//        NSString *savePath = [_filePath stringByAppendingPathComponent:response.suggestedFilename];
-//        NSLog(@"%@", savePath);
-//        return [NSURL URLWithString:savePath];
-        NSString *path = [_filePath stringByAppendingPathComponent:response.suggestedFilename];
-        NSLog(@"%@", path);
-        return [NSURL fileURLWithPath:path];
-        
-        
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        
-    }];
-    [downloadTask resume];
-}
-
-- (void)testMethod2 {
-    NSURL *URL = [NSURL URLWithString:@"http://imgsrc.baidu.com/forum/pic/item/ef2af6246b600c3392c85a721a4c510fd8f9a1a4.jpg"];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    //请求
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    //下载Task操作
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-        
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        
-        NSString *path = [_filePath stringByAppendingPathComponent:response.suggestedFilename];
-        NSLog(@"%@", path);
-        return [NSURL fileURLWithPath:path];
-        
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        
-        
-    }];
-    [downloadTask resume];
 }
 
 @end
