@@ -13,7 +13,6 @@
 
 @interface MyTableViewCell ()
 
-@property (nonatomic) UIImageView *TLImageView;
 @property (nonatomic) UIActivityIndicatorView *indicatorView;
 
 @property (nonatomic, assign) BOOL hasLoadedImage;
@@ -22,36 +21,35 @@
 
 @implementation MyTableViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [self setNeedsLayout];
-        [self setNeedsDisplay];
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self initial];
     }
     return self;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
-}
-
-- (void)layoutSubviews {
+//    [self setNeedsLayout];
+//    [self setNeedsDisplay];
     [self initial];
 }
 
 - (void)initial {
     // 初始化imageView，设定布局
-    CGFloat cellHeight = self.frame.size.height;
-    _TLImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, cellHeight - 20, cellHeight - 20)];
+    _TLImageView = [[UIImageView alloc] init];
     NSString *placeholderName = [[NSBundle mainBundle] pathForResource:@"placeholder" ofType:@"jpg"];
     [_TLImageView setImage:[UIImage imageWithContentsOfFile:placeholderName]];
+    [_TLImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_TLImageView];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_TLImageView]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_TLImageView)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_TLImageView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_TLImageView)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_TLImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_TLImageView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     
     _indicatorView = [[UIActivityIndicatorView alloc] init];
     _indicatorView.center = _TLImageView.center;
     _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-    [self addSubview:_indicatorView];
+//    [self addSubview:_indicatorView];
     self.hasLoadedImage = NO;
     
 }

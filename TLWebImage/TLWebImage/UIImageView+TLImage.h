@@ -10,6 +10,6 @@
 
 @interface UIImageView (TLImage)
 
-- (void)setImageWithURL:(NSURL *) url;
+- (void)tl_setImageWithURL:(NSURL *) url;
 
 @end

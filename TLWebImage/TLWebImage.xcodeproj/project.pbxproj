@@ -17,6 +17,7 @@
 		EA0162891E23615E009AB64D /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0162881E23615E009AB64D /* MyTableViewCell.m */; };
 		EA01628B1E23670B009AB64D /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA01628A1E23670B009AB64D /* placeholder.jpg */; };
 		EA01628E1E237007009AB64D /* ImageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EA01628D1E237007009AB64D /* ImageFetcher.m */; };
+		EA6CEB701E24B95800E363FA /* 16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA6CEB6F1E24B95800E363FA /* 16.jpg */; };
 		EA7AB6FA1E2381AB00F6C57E /* UIImageView+TLImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7AB6F91E2381AB00F6C57E /* UIImageView+TLImage.m */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		EA01628A1E23670B009AB64D /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		EA01628C1E237007009AB64D /* ImageFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFetcher.h; sourceTree = "<group>"; };
 		EA01628D1E237007009AB64D /* ImageFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFetcher.m; sourceTree = "<group>"; };
+		EA6CEB6F1E24B95800E363FA /* 16.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 16.jpg; sourceTree = "<group>"; };
 		EA7AB6F81E2381AB00F6C57E /* UIImageView+TLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TLImage.h"; sourceTree = "<group>"; };
 		EA7AB6F91E2381AB00F6C57E /* UIImageView+TLImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TLImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +77,7 @@
 		EA0162641E236085009AB64D = {
 			isa = PBXGroup;
 			children = (
+				EA6CEB6F1E24B95800E363FA /* 16.jpg */,
 				EA01628A1E23670B009AB64D /* placeholder.jpg */,
 				EA01626F1E236085009AB64D /* TLWebImage */,
 				EA01626E1E236085009AB64D /* Products */,
@@ -182,6 +185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6CEB701E24B95800E363FA /* 16.jpg in Resources */,
 				EA0162801E236085009AB64D /* LaunchScreen.storyboard in Resources */,
 				EA01628B1E23670B009AB64D /* placeholder.jpg in Resources */,
 				EA01627D1E236085009AB64D /* Assets.xcassets in Resources */,
