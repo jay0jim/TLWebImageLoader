@@ -23,10 +23,10 @@
 @implementation ImageFetcher
 
 + (id)sharedInstance {
-    static ImageFetcher *sharedInstance = nil;
+    static id sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[ImageFetcher alloc] init];
+        sharedInstance = [self new];
     });
     return sharedInstance;
 }
@@ -55,9 +55,14 @@
 
 }
 
-- (void)fetchImageWithURL:(NSURL *) url
+- (id)fetchImageWithURL:(NSURL *) url
          PlaceholderImage:(UIImage *) placeholder
+                 Progress:(ImageFetcherBlockProgress) progress
         CompletionHandler:(ImageFetcherBlockComplete) complete {
+    
+    // 下载任务（如需要）
+    NSNumber *fakeTask = @(0);
+    
     NSString *urlString = [url absoluteString];
     
     // 获取文件名
@@ -78,7 +83,7 @@
             // 这样做是为了确保如果在使用UITableView等涉及到重用的类中，重用时会
             // 显示过时的或错误的图
             if (complete != nil) {
-                complete(placeholder);
+                complete(placeholder, NO);
             }
             
             // 如果本地沙盒也不存在，则从网络上下载，并保存到本地沙盒和cache中
@@ -87,7 +92,9 @@
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
                 
-                // 下载进度
+                if (progress != nil) {
+                    progress(downloadProgress);
+                }
                 
             } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
                 
@@ -103,26 +110,29 @@
                     [_cache setObject:image forKey:fileName];
                     
                     if (complete != nil) {
-                        complete(image);
+                        complete(image, YES);
                     }
                 }
                 
             }];
             [task resume];
             
+            return task;
             
         } else {
             // 把从本地沙盒读取到的图片放入cache中
             [_cache setObject:image forKey:fileName];
             if (complete != nil) {
-                complete(image);
+                complete(image, YES);
             }
+            return fakeTask;
         }
         
     } else {
         if (complete != nil) {
-            complete(image);
+            complete(image, YES);
         }
+        return fakeTask;
     }
     
 }

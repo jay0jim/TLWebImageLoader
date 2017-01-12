@@ -9,14 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef void(^ImageFetcherBlockComplete)(id object);
+typedef void(^ImageFetcherBlockComplete)(UIImage *object, BOOL isDone);
+typedef void(^ImageFetcherBlockProgress)(NSProgress *progress);
 
 @interface ImageFetcher : NSObject
 
 + (id)sharedInstance;
 
-- (void)fetchImageWithURL:(NSURL *) url
+- (NSURLSessionDownloadTask *)fetchImageWithURL:(NSURL *) url
          PlaceholderImage:(UIImage *) placeholder
+                 Progress:(ImageFetcherBlockProgress) progress
         CompletionHandler:(ImageFetcherBlockComplete) complete;
 - (void)clearLocalFile;
 
